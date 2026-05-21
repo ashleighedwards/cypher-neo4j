@@ -1,6 +1,7 @@
 package com.wizardgraph.service;
 
 import com.wizardgraph.dto.FriendResponse;
+import com.wizardgraph.dto.EnemyResponse;
 import com.wizardgraph.model.Character;
 import com.wizardgraph.repository.CharacterRepository;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,13 @@ public class CharacterService {
         List<Character> friends = characterRepository.findFriendsByName(name);
         return friends.stream()
             .map(friend -> new FriendResponse(friend.getName(), friend.getHouse()))
+            .toList();
+    }
+
+    public List<EnemyResponse> getEnemies(String name) {
+        List<Character> enemies = characterRepository.findEnemiesByName(name);
+        return enemies.stream()
+            .map(enemy -> new EnemyResponse(enemy.getName(), enemy.getHouse()))
             .toList();
     }
 }

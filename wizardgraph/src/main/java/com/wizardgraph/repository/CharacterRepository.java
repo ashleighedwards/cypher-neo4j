@@ -19,4 +19,11 @@ public interface CharacterRepository extends Neo4jRepository<Character, Long> {
         RETURN friend
         """)
     List<Character> findFriendsByName(String name);
+
+    @Query("""
+        MATCH (c:Character)-[:ENEMY_OF]->(enemy:Character) 
+        WHERE c.name = $name 
+        RETURN enemy
+        """)
+    List<Character> findEnemiesByName(String name);
 }

@@ -1,6 +1,7 @@
 package com.wizardgraph.controller;
 
 import com.wizardgraph.dto.FriendResponse;
+import com.wizardgraph.dto.EnemyResponse;
 import com.wizardgraph.model.Character;
 import com.wizardgraph.repository.CharacterRepository;
 import com.wizardgraph.service.CharacterService;
@@ -47,5 +48,16 @@ public class CharacterController {
     @GetMapping("/{name}/friends")
     public List<FriendResponse> getFriends(@PathVariable String name) {
         return characterService.getFriends(name);
+    }
+
+    /**
+     * Get the enemies of the character with the given name.
+     *
+     * @param name the character name from the request path
+     * @return a list of enemy responses containing name and house
+     */
+    @GetMapping("/{name}/enemies")
+    public List<EnemyResponse> getEnemies(@PathVariable String name) {
+        return characterService.getEnemies(name);
     }
 }
