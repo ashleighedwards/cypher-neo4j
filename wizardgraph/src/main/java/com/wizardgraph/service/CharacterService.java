@@ -63,4 +63,17 @@ public class CharacterService {
             .map(friend -> new FriendResponse(friend.getName(), friend.getHouse()))
             .toList();
     }
+
+    /**
+     * Retrieve friend recommendations for the character identified by name.
+     * 
+     * @param name the character name to lookup
+     * @return a list of recommended friend DTOs with their name and house
+     */
+    public List<FriendResponse> getFriendRecommendations(String name) {
+        List<Character> recommendations = characterRepository.findFriendRecommendationsByName(name);
+        return recommendations.stream()
+            .map(friend -> new FriendResponse(friend.getName(), friend.getHouse()))
+            .toList();
+    }
 }

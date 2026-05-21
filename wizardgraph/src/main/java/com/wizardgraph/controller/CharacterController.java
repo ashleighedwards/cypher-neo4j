@@ -72,4 +72,15 @@ public class CharacterController {
     public List<FriendResponse> getMutualFriends(@PathVariable String name, @PathVariable String name2) {
         return characterService.getMutualFriends(name, name2);
     }
+
+    /**
+     * Get friend recommendations for the character with the given name.
+     *
+     * @param name the character name from the request path
+     * @return a list of friend responses containing name and house for recommended friends
+     */
+    @GetMapping("/{name}/recommendations")
+    public List<FriendResponse> getFriendRecommendations(@PathVariable String name) {
+        return characterService.getFriendRecommendations(name);
+    }
 }

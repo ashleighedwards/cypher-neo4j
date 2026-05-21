@@ -26,7 +26,9 @@ public class DataLoader {
 
                     MERGE (harry)-[:FRIENDS_WITH]->(hermione)
                     MERGE (harry)-[:FRIENDS_WITH]->(ron)
+                    MERGE (harry)-[:FRIENDS_WITH]->(snape)
                     MERGE (hermione)-[:FRIENDS_WITH]->(ron)
+                    MERGE (hermione)-[:FRIENDS_WITH]->(harry)
                     MERGE (draco)-[:FRIENDS_WITH]->(voldemort)
                     MERGE (dumbledore)-[:FRIENDS_WITH]->(harry)
                     MERGE (luna)-[:FRIENDS_WITH]->(harry)

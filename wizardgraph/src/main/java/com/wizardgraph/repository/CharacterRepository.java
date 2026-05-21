@@ -33,7 +33,6 @@ public interface CharacterRepository extends Neo4jRepository<Character, Long> {
         """)
     List<Character> findEnemiesByName(String name);
 
-
     /**
      * Finds all characters that are friends with both the specified characters.
      *
@@ -49,4 +48,20 @@ public interface CharacterRepository extends Neo4jRepository<Character, Long> {
         RETURN mutual
         """)
     List<Character> findMutualFriendsByName(String name, String name2);
+
+    /**
+     * Finds friend recommendations for the specified character based on friends of friends.
+     *
+     * @param name the name of the character to find friend recommendations for
+     * @return a list of characters that are recommended as friends for the specified character
+     */    
+    @Query("""
+        MATCH (c:Character)-[:FRIENDS_WITH]->(:Character)-[:FRIENDS_WITH]->(recommendation:Character) 
+        WHERE c.name = $name
+        AND NOT (c)-[:FRIENDS_WITH]->(recommendation)
+        AND NOT (c)-[:ENEMY_OF]->(recommendation)
+        AND c <> recommendation
+        RETURN DISTINCT recommendation
+        """)
+    List<Character> findFriendRecommendationsByName(String name);
 }
