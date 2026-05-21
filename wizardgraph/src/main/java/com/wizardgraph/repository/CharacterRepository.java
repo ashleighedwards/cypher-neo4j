@@ -3,6 +3,7 @@ package com.wizardgraph.repository;
 import com.wizardgraph.model.Character;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
+import org.neo4j.driver.types.Path;
 
 import java.util.List;
 
@@ -64,4 +65,17 @@ public interface CharacterRepository extends Neo4jRepository<Character, Long> {
         RETURN DISTINCT recommendation
         """)
     List<Character> findFriendRecommendationsByName(String name);
+
+    /**
+     * Finds the shortest path between two characters identified by their names.
+     * @param from the name of the starting character
+     * @param to the name of the target character
+     * @return the shortest path between the two characters, or null if no path exists
+     */
+    @Query("""
+        MATCH p=shortestPath((c:Character)-[:FRIENDS_WITH*1..6]-(b:Character)) 
+        WHERE c.name = $from AND b.name = $to 
+        RETURN nodes(p)
+        """)
+    List<Character> findShortestPathByName(String from, String to);
 }

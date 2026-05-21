@@ -83,4 +83,16 @@ public class CharacterController {
     public List<FriendResponse> getFriendRecommendations(@PathVariable String name) {
         return characterService.getFriendRecommendations(name);
     }
+
+    /**
+     * Get the shortest path between two characters.
+     *
+     * @param from the name of the starting character
+     * @param to the name of the ending character
+     * @return a list of friend responses containing name and house for characters in the shortest path
+     */
+    @GetMapping("/path/{from}/{to}")
+    public List<FriendResponse> getShortestPath(@PathVariable String from, @PathVariable String to) {
+        return characterService.getShortestPath(from, to);
+    }
 }

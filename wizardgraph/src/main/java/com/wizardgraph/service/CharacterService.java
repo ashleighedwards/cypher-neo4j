@@ -6,7 +6,11 @@ import com.wizardgraph.model.Character;
 import com.wizardgraph.repository.CharacterRepository;
 import org.springframework.stereotype.Service;
 
+import org.neo4j.driver.types.Node;
+import org.neo4j.driver.types.Path;
+
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Service layer for character lookups and related operations.
@@ -73,6 +77,22 @@ public class CharacterService {
     public List<FriendResponse> getFriendRecommendations(String name) {
         List<Character> recommendations = characterRepository.findFriendRecommendationsByName(name);
         return recommendations.stream()
+            .map(friend -> new FriendResponse(friend.getName(), friend.getHouse()))
+            .toList();
+    }
+
+
+    /**
+     * Retrieve the shortest path of friendships between two characters identified by their names.
+     * 
+     * @param from the name of the starting character
+     * @param to the name of the target character
+     * @return a list of character names representing the shortest path
+     */
+    public List<FriendResponse> getShortestPath(String from, String to) {
+        List<Character> path = characterRepository.findShortestPathByName(from, to);
+
+        return path.stream()
             .map(friend -> new FriendResponse(friend.getName(), friend.getHouse()))
             .toList();
     }
