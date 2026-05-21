@@ -73,7 +73,9 @@ public interface CharacterRepository extends Neo4jRepository<Character, Long> {
      * @return the shortest path between the two characters, or null if no path exists
      */
     @Query("""
-        MATCH p=shortestPath((c:Character)-[:FRIENDS_WITH*1..6]-(b:Character)) 
+        MATCH p=shortestPath((c:Character)-[
+            :FRIENDS_WITH*1..6
+        ]-(b:Character)) 
         WHERE c.name = $from AND b.name = $to 
         RETURN nodes(p)
         """)
