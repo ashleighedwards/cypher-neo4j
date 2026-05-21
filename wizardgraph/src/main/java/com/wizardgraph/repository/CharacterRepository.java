@@ -7,7 +7,6 @@ import org.springframework.data.neo4j.repository.query.Query;
 import java.util.List;
 
 public interface CharacterRepository extends Neo4jRepository<Character, Long> {
-
     /**
      * Finds all characters that are friends with the specified character.
      *
@@ -15,7 +14,7 @@ public interface CharacterRepository extends Neo4jRepository<Character, Long> {
      * @return a list of characters that are friends with the specified character
      */
     @Query("""
-        MATCH (c:Character)-[:FRIENDs_WITH]->(friend:Character) 
+        MATCH (c:Character)-[:FRIENDS_WITH]->(friend:Character) 
         WHERE c.name = $name 
         RETURN friend
         """)
