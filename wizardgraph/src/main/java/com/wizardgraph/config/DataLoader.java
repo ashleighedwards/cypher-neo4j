@@ -27,7 +27,12 @@ public class DataLoader {
                     MERGE (harry)-[:FRIENDS_WITH]->(hermione)
                     MERGE (harry)-[:FRIENDS_WITH]->(ron)
                     MERGE (hermione)-[:FRIENDS_WITH]->(ron)
-                    MERGE (draco)-[:FRIENDS_WITH]->(luna)
+                    MERGE (draco)-[:FRIENDS_WITH]->(voldemort)
+                    MERGE (dumbledore)-[:FRIENDS_WITH]->(harry)
+                    MERGE (luna)-[:FRIENDS_WITH]->(harry)
+                    MERGE (luna)-[:FRIENDS_WITH]->(hermione)
+                    MERGE (luna)-[:FRIENDS_WITH]->(ron)
+                    MERGE (snape)-[:FRIENDS_WITH]->(dumbledore)
 
                     MERGE (harry)-[:ENEMY_OF]->(draco)
                     MERGE (harry)-[:ENEMY_OF]->(voldemort)
@@ -36,11 +41,6 @@ public class DataLoader {
                     MERGE (draco)-[:ENEMY_OF]->(harry)
                     MERGE (luna)-[:ENEMY_OF]->(draco)
 
-                    MERGE (snape)-[:ALLY_OF]->(voldemort)
-                    MERGE (dumbledore)-[:ALLY_OF]->(harry)
-                    MERGE (dumbledore)-[:ALLY_OF]->(hermione)
-                    MERGE (dumbledore)-[:ALLY_OF]->(ron)
-                    
                 """);
 
                 System.out.println("Sample data loaded into Neo4j.");

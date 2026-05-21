@@ -60,4 +60,16 @@ public class CharacterController {
     public List<EnemyResponse> getEnemies(@PathVariable String name) {
         return characterService.getEnemies(name);
     }
+
+    /**
+     * Get the mutual friends of the characters with the given names.
+     * 
+     * @param name the name of the first character
+     * @param name2 the name of the second character
+     * @return a list of friend responses containing name and house for mutual friends
+     */
+    @GetMapping("/{name}/mutual-friends/{name2}")
+    public List<FriendResponse> getMutualFriends(@PathVariable String name, @PathVariable String name2) {
+        return characterService.getMutualFriends(name, name2);
+    }
 }
