@@ -68,7 +68,7 @@ public class CharacterController {
      * @param name2 the name of the second character
      * @return a list of friend responses containing name and house for mutual friends
      */
-    @GetMapping("/{name}/mutual-friends/{name2}")
+    @GetMapping("/{name}/mutual/{name2}")
     public List<FriendResponse> getMutualFriends(@PathVariable String name, @PathVariable String name2) {
         return characterService.getMutualFriends(name, name2);
     }
